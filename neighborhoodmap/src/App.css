@@ -1,28 +1,44 @@
-.App {
-  text-align: center;
+/*Navbar*/
+.navbar-toggler-icon {
+  background-image: url('./hamburger.svg');
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+/*Sidebar*/
+.sidenav {
   color: white;
+  width: 250px;
+  height: 500px;
+  position: fixed;
+  z-index: 1;
+  overflow-x: hidden;
+  transition: 0.25s;
 }
 
-.App-title {
-  font-size: 1.5em;
+.sidenav-toggle-off{
+  width: 0;
 }
 
-.App-intro {
-  font-size: large;
+#location-form{
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+#filter, #locations-found{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#submit-btn{
+  width: 30%;
+}
+
+#clear-btn{
+  margin-left: 10px;
+  width: 30%;
+}
+
+#map{
+  width: 100%;
+  height: 500px;
+  background-color: grey;
 }

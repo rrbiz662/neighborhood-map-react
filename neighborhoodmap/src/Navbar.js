@@ -1,33 +1,27 @@
 import React from 'react';
-import {Navbar as Navigationbar, Nav, NavItem} from 'react-bootstrap';
 
-//let sidebar = document.getElementById("sidebar");
+let sidebar;
 
 class NavBar extends React.Component{
     toggleSidebar = () => {
-        console.log("Menu clicked");
-        // width = sidebar.css("width");
+        if(sidebar.classList.contains("sidenav-toggle-off"))
+            sidebar.classList.toggle("sidenav-toggle-off", false);
+        else
+            sidebar.classList.toggle("sidenav-toggle-off", true);
+    }
 
-        // if(width === "0px")
-        //     sidebar.css("width", "250px");
-        // else
-        //     sidebar.css("width", "0");
+    componentDidMount(){
+        sidebar = document.getElementById("sidebar");
     }
 
     render(){
         return (
-            <Navigationbar>
-                <Navigationbar.Header>
-                    <Navigationbar.Brand>
-                        Neighborhood Map
-                    </Navigationbar.Brand>
-                </Navigationbar.Header>
-                <Nav pullRight>
-                    <NavItem onClick={this.toggleSidebar}>
-                        Menu
-                    </NavItem>
-                </Nav>
-            </Navigationbar>
+            <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
+                <span className="navbar-brand">Neighborhood Map</span>
+                <button className="navbar-toggler" type="button" onClick={this.toggleSidebar}>
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+            </nav>
         );
     }
 }

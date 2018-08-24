@@ -8,7 +8,7 @@ class NavBar extends React.Component{
 
     render(){
         return (
-            <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+            <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
                 <span className="navbar-brand">Neighborhood Map</span>
                 <button className="navbar-toggler" type="button" onClick={this.toggleSidebar}>
                     <span className="navbar-toggler-icon"></span>

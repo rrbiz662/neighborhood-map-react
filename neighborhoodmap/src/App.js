@@ -8,7 +8,24 @@ const MEDIA_QUERY_MD = "(max-width: 768px)";
 const MEDIA_QUERY_SM = "(max-width: 550px)";
 
 class App extends Component {
-  mediaQueryListener = (mediaQueryList) => {
+  state = {
+    map: null,
+  }
+
+  setupMediaQueries = () => {
+    let mediaQueryList = [
+      window.matchMedia(MEDIA_QUERY_MD),
+      window.matchMedia(MEDIA_QUERY_SM)
+    ];
+
+    mediaQueryList.forEach((query) => {
+      this.handleMediaQuery(query);
+      query.addListener(this.handleMediaQuery);
+
+    })
+  }
+
+  handleMediaQuery = (mediaQueryList) => {
     switch(mediaQueryList.media){
       case MEDIA_QUERY_MD:
         let sidebar = document.getElementById("sidebar");
@@ -25,38 +42,57 @@ class App extends Component {
         let backSpacer = document.getElementById("back-spacer");
 
         if(mediaQueryList.matches){
-          frontSpacer.classList.remove("col-1");
-          backSpacer.classList.remove("col-1");
-          map.classList.replace("col-10", "col-12");
+          frontSpacer.classList.remove("col-2");
+          backSpacer.classList.remove("col-2");
+          map.classList.replace("col-8", "col-12");
         }
         else{
-          frontSpacer.classList.add("col-1");
-          backSpacer.classList.add("col-1");
-          map.classList.replace("col-12", "col-10");
+          frontSpacer.classList.add("col-2");
+          backSpacer.classList.add("col-2");
+          map.classList.replace("col-12", "col-8");
         }
 
         break;
-    }
+      default:
+        // On default do nothing.
+        break;    }
+  }
+
+  addGoogleMapScript = () => {
+    const script = document.createElement("script");
+
+    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCpz3lEiM6sC23AMUOSJ6frxjjE95EXI50&callback=initMap";
+    script.async = true;
+
+    document.body.appendChild(script);
+
+    window.initMap = this.initMap;
+  }
+
+  initMap = () => {
+    let mapDiv = document.getElementById("map");
+
+    this.setState({
+      map: new window.google.maps.Map(mapDiv, {
+        zoom: 6,
+        center: {
+          lat: 30.143347,
+          lng: -97.833595
+        }
+      })
+    });
   }
 
   componentDidMount(){
-    let mediaQueryList = [
-      window.matchMedia(MEDIA_QUERY_MD),
-      window.matchMedia(MEDIA_QUERY_SM)
-    ];
-
-    mediaQueryList.forEach((query) => {
-      this.mediaQueryListener(query);
-      query.addListener(this.mediaQueryListener);
-
-    })
+    this.setupMediaQueries();
+    this.addGoogleMapScript();
   }
 
   render() {
     return (
       <div className="App">
         <Navbar/>
-        <Sidebar/>
+        <Sidebar map={this.state.map}/>
         <MapDisplay/>
       </div>
     );

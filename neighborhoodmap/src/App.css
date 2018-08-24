@@ -39,8 +39,12 @@
 
 /*Map*/
 
+.col-10, .col-12, .col-1{
+  padding: 0 !important;
+}
+
 #map{
   width: 100%;
   height: 500px;
-  background-color: grey;
+  background-color: gray;
 }

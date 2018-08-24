@@ -4,10 +4,13 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import MapDisplay from "./MapDisplay";
 
+const MEDIA_QUERY_MD = "(max-width: 768px)";
+const MEDIA_QUERY_SM = "(max-width: 550px)";
+
 class App extends Component {
   mediaQueryListener = (mediaQueryList) => {
     switch(mediaQueryList.media){
-      case "(max-width: 850px)":
+      case MEDIA_QUERY_MD:
         let sidebar = document.getElementById("sidebar");
 
         if(mediaQueryList.matches)
@@ -16,21 +19,20 @@ class App extends Component {
           sidebar.classList.remove("sidenav-toggle-off");
 
         break;
-      case "(max-width: 550px)":
+      case MEDIA_QUERY_SM:
         let frontSpacer = document.getElementById("front-spacer");
         let map = document.getElementById("map");
         let backSpacer = document.getElementById("back-spacer");
 
-
         if(mediaQueryList.matches){
-          frontSpacer.classList.remove("col-2");
-          backSpacer.classList.remove("col-2");
-          map.classList.replace("col-8", "col-12");
+          frontSpacer.classList.remove("col-1");
+          backSpacer.classList.remove("col-1");
+          map.classList.replace("col-10", "col-12");
         }
         else{
-          frontSpacer.classList.add("col-2");
-          backSpacer.classList.add("col-2");
-          map.classList.replace("col-12", "col-8");
+          frontSpacer.classList.add("col-1");
+          backSpacer.classList.add("col-1");
+          map.classList.replace("col-12", "col-10");
         }
 
         break;
@@ -39,8 +41,8 @@ class App extends Component {
 
   componentDidMount(){
     let mediaQueryList = [
-      window.matchMedia("(max-width: 850px)"),
-      window.matchMedia("(max-width: 550px)")
+      window.matchMedia(MEDIA_QUERY_MD),
+      window.matchMedia(MEDIA_QUERY_SM)
     ];
 
     mediaQueryList.forEach((query) => {

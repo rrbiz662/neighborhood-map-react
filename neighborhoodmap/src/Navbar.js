@@ -4,14 +4,8 @@ let sidebar;
 
 class NavBar extends React.Component{
     toggleSidebar = () => {
-        if(sidebar.classList.contains("sidenav-toggle-off"))
-            sidebar.classList.toggle("sidenav-toggle-off", false);
-        else
-            sidebar.classList.toggle("sidenav-toggle-off", true);
-    }
-
-    componentDidMount(){
-        sidebar = document.getElementById("sidebar");
+        let sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("sidenav-toggle-off");
     }
 
     render(){

@@ -5,11 +5,11 @@ class MapDisplay extends React.Component{
         return(
             <div className="container">
             <div className="row">
-                <div className="col-2"></div>
+                <div id="front-spacer" className="col-2"></div>
                 <div id="map" className="col-8">
                     Error loading map data.
                 </div>
-                <div className="col-2"></div>
+                <div id="back-spacer" className="col-2"></div>
             </div>
         </div>
         );

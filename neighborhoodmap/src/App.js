@@ -58,34 +58,14 @@ class App extends Component {
         break;    }
   }
 
-  addGoogleMapScript = () => {
-    const script = document.createElement("script");
-
-    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCpz3lEiM6sC23AMUOSJ6frxjjE95EXI50&callback=initMap";
-    script.async = true;
-
-    document.body.appendChild(script);
-
-    window.initMap = this.initMap;
-  }
-
-  initMap = () => {
-    let mapDiv = document.getElementById("map");
-
-    this.setState({
-      map: new window.google.maps.Map(mapDiv, {
-        zoom: 6,
-        center: {
-          lat: 30.143347,
-          lng: -97.833595
-        }
-      })
-    });
+  setMap = (map) => {
+      this.setState({
+        map: map
+      });
   }
 
   componentDidMount(){
     this.setupMediaQueries();
-    this.addGoogleMapScript();
   }
 
   render() {
@@ -93,7 +73,7 @@ class App extends Component {
       <div className="App">
         <Navbar/>
         <Sidebar map={this.state.map}/>
-        <MapDisplay/>
+        <MapDisplay setMap={this.setMap}/>
       </div>
     );
   }

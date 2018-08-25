@@ -19,7 +19,6 @@ class FilterList extends React.Component{
             this.props.updateFilteredBusinesses(this.props.businessListToFilter);
         }
         else{
-
             let filteredList = this.props.businessListToFilter.filter((business) => {
                 let foundMatch = false;
 

@@ -10,6 +10,8 @@ const MEDIA_QUERY_SM = "(max-width: 550px)";
 class App extends Component {
   state = {
     map: null,
+    businessList: [],
+    filterList: []
   }
 
   setupMediaQueries = () => {
@@ -64,6 +66,13 @@ class App extends Component {
       });
   }
 
+  setBusinesses = (businesses, filters) => {
+    this.setState({
+      businessList: businesses,
+      filterList: filters
+    });
+  }
+
   componentDidMount(){
     this.setupMediaQueries();
   }
@@ -72,7 +81,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar/>
-        <Sidebar map={this.state.map}/>
+        <Sidebar map={this.state.map} businesses={this.state.businessList} filters={this.state.filterList} setBusinesses={this.setBusinesses}/>
         <MapDisplay setMap={this.setMap}/>
       </div>
     );

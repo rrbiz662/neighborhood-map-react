@@ -18,6 +18,10 @@
   width: 0;
 }
 
+.list-group-item{
+  color: black !important;
+}
+
 #location-form{
   padding-left: 10px;
   padding-right: 10px;

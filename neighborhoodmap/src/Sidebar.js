@@ -7,15 +7,20 @@ import LocationForm from './LocationForm';
 class Sidebar extends React.Component{
     static propTypes = {
         map: PropTypes.object,
-        setBusinesses: PropTypes.func
+        initLists: PropTypes.func,
+        updateFilteredBusinesses: PropTypes.func,
+        businessList: PropTypes.array,
+        filters: PropTypes.array,
+        filteredBusinessList: PropTypes.array
+
     }
 
     render(){
         return(
             <div id="sidebar" className="sidenav bg-dark">
-                <LocationForm map={this.props.map} setBusinesses={this.props.setBusinesses}/>
-                <FilterList filterList={this.props.filters}/>
-                <BusinessList businessList={this.props.businesses}/>
+                <LocationForm map={this.props.map} initLists={this.props.initLists}/>
+                <FilterList filterList={this.props.filters} businessListToFilter={this.props.businessList} updateFilteredBusinesses={this.props.updateFilteredBusinesses}/>
+                <BusinessList businessList={this.props.filteredBusinessList}/>
             </div>
         );
     }

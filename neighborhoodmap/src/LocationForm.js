@@ -8,7 +8,7 @@ const RADIUS = 1000;
 class LocationForm extends React.Component{
     static propTypes = {
         map: PropTypes.object,
-        setBusinesses: PropTypes.func
+        initLists: PropTypes.func
     }
 
     state ={
@@ -70,7 +70,7 @@ class LocationForm extends React.Component{
                     },
                     latitude: business.coordinates.latitude,
                     longitude: business.coordinates.longitude,
-                    category: business.categories[0].title,
+                    categories: business.categories,
                 });
 
                 business.categories.forEach((category) => {
@@ -78,7 +78,10 @@ class LocationForm extends React.Component{
                         filters.push(category.title);
                 });
             }
-            this.props.setBusinesses(businesses, filters);
+
+            let filteredBusinesses = businesses.slice(0);
+
+            this.props.initLists(businesses, filters, filteredBusinesses);
         }).catch((e) => {
             console.log("Error" + e);
         });

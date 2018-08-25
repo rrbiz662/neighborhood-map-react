@@ -11,6 +11,7 @@ class App extends Component {
   state = {
     map: null,
     businessList: [],
+    filteredBusinessList: [],
     filterList: []
   }
 
@@ -66,10 +67,17 @@ class App extends Component {
       });
   }
 
-  setBusinesses = (businesses, filters) => {
+  initLists = (businesses, filters, filteredBusinesses) => {
     this.setState({
       businessList: businesses,
+      filteredBusinessList: filteredBusinesses,
       filterList: filters
+    });
+  }
+
+  updateFilteredBusinesses = (filteredBusinesses) => {
+    this.setState({
+      filteredBusinessList: filteredBusinesses
     });
   }
 
@@ -81,7 +89,14 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar/>
-        <Sidebar map={this.state.map} businesses={this.state.businessList} filters={this.state.filterList} setBusinesses={this.setBusinesses}/>
+        <Sidebar
+          map={this.state.map}
+          businessList={this.state.businessList}
+          filteredBusinessList={this.state.filteredBusinessList}
+          filters={this.state.filterList}
+          initLists={this.initLists}
+          updateFilteredBusinesses={this.updateFilteredBusinesses}
+        />
         <MapDisplay setMap={this.setMap}/>
       </div>
     );

@@ -19,7 +19,7 @@ class BusinessList extends React.Component{
     render(){
         return(
             <div>
-                <ul className="list-group mt-3">
+                <ul id="locations-found" className="list-group mt-3">
                 {
                     this.props.businessList.map((business) => (
                         <li key={business.id} data-key={business.id} className="list-group-item" onClick={this.handleClick}>{business.name}</li>

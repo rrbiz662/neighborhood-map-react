@@ -13,26 +13,33 @@ class FilterList extends React.Component{
     }
 
     handleSelect = (event) => {
+        let selectedOption = event.target.value;
 
-        let filteredList = this.props.businessListToFilter.filter((business) => {
-            let foundMatch = false;
+        if(selectedOption === "All"){
+            this.props.updateFilteredBusinesses(this.props.businessListToFilter);
+        }
+        else{
 
-            for (const category of business.categories) {
-                if(category.title === event.target.value){
-                    foundMatch = true;
-                    break;
+            let filteredList = this.props.businessListToFilter.filter((business) => {
+                let foundMatch = false;
+
+                for (const category of business.categories) {
+                    if(category.title === selectedOption){
+                        foundMatch = true;
+                        break;
+                    }
                 }
-            }
 
-            if(foundMatch){
-                foundMatch = false;
-                return business;
-            }
-            else
-                return null;
-        });
+                if(foundMatch){
+                    foundMatch = false;
+                    return business;
+                }
+                else
+                    return null;
+            });
 
-        this.props.updateFilteredBusinesses(filteredList);
+            this.props.updateFilteredBusinesses(filteredList);
+        }
 
         this.setState({
             selectValue: event.target.value
@@ -43,11 +50,12 @@ class FilterList extends React.Component{
         return(
             <div>
                 <select  onChange={this.handleSelect} name="filter" id="filter" className="btn">
-                {
-                    this.props.filterList.map((category, index) => (
-                        <option key={index} value={category}>{category}</option>
-                    ))
-                }
+                    <option value="All">All</option>
+                    {
+                        this.props.filterList.map((category, index) => (
+                            <option key={index} value={category}>{category}</option>
+                        ))
+                    }
                 </select>
             </div>
         );

@@ -73,8 +73,8 @@ class LocationForm extends React.Component{
                 let filteredBusinesses = businesses.slice(0);
 
                 this.props.initLists(businesses, filters, filteredBusinesses);
-            }).catch((e) => {
-                console.log("Error" + e);
+            }).catch(() => {
+                alert("Error connecting to Yelp.")
             });
         }
     }

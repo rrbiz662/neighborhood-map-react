@@ -137,7 +137,7 @@ class Map extends React.Component{
 
     render(){
         return(
-            <div id="map" className="col-8"></div>
+            <div id="map" className="col-8">Loading map...</div>
         );
     }
 }

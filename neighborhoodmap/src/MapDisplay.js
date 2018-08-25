@@ -36,6 +36,11 @@ class MapDisplay extends React.Component {
         this.addGoogleMapScript();
     }
 
+    componentDidUpdate(prevProps){
+        if(this.props.map !== prevProps.map)
+            console.log("Not same map");
+    }
+
     render() {
         return (
             <div className="container">

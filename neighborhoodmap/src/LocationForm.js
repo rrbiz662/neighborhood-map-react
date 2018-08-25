@@ -69,7 +69,7 @@ class LocationForm extends React.Component{
                         ${business.address.street}<br>
                         ${business.address.city}<br>
                         <a href="https:www.yelp.com"><img src="./yelp.png"></a></div>
-                        `
+                        `;
 
         infoWindow.setContent(content);
         infoWindow.open(this.props.map, marker);

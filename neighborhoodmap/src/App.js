@@ -9,7 +9,8 @@ const MEDIA_QUERY_SM = "(max-width: 550px)";
 
 class App extends Component {
   state = {
-    map: null,
+    map: {},
+    infoWindow: {},
     businessList: [],
     filteredBusinessList: [],
     filterList: []
@@ -67,6 +68,12 @@ class App extends Component {
       });
   }
 
+  setInfoWindow = (infoWindow) => {
+    this.setState({
+      infoWindow: infoWindow
+    });
+  }
+
   initLists = (businesses, filters, filteredBusinesses) => {
     this.setState({
       businessList: businesses,
@@ -91,13 +98,14 @@ class App extends Component {
         <Navbar/>
         <Sidebar
           map={this.state.map}
+          infoWindow={this.state.infoWindow}
           businessList={this.state.businessList}
           filteredBusinessList={this.state.filteredBusinessList}
           filters={this.state.filterList}
           initLists={this.initLists}
           updateFilteredBusinesses={this.updateFilteredBusinesses}
         />
-        <MapDisplay setMap={this.setMap}/>
+        <MapDisplay map={this.state.map} setMap={this.setMap} setInfoWindow={this.setInfoWindow}/>
       </div>
     );
   }

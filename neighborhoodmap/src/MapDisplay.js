@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 
 class MapDisplay extends React.Component {
     static propTypes = {
-        setMap: PropTypes.func.isRequired
+        setMap: PropTypes.func.isRequired,
+        setInfoWindow: PropTypes.func.isRequired,
+        map: PropTypes.object
     }
 
     addGoogleMapScript = () => {
@@ -27,6 +29,7 @@ class MapDisplay extends React.Component {
             }
         });
         this.props.setMap(map);
+        this.props.setInfoWindow(new window.google.maps.InfoWindow());
     }
 
     componentDidMount() {

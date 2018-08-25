@@ -8,6 +8,7 @@ const RADIUS = 1000;
 class LocationForm extends React.Component{
     static propTypes = {
         map: PropTypes.object,
+        infoWindow: PropTypes.object,
         initLists: PropTypes.func
     }
 
@@ -16,9 +17,6 @@ class LocationForm extends React.Component{
     }
 
     zoomToArea = (address) => {
-        if(!this.props.map)
-            return;
-
         let geoCoder = new window.google.maps.Geocoder();
 
         geoCoder.geocode({
@@ -29,6 +27,59 @@ class LocationForm extends React.Component{
                 this.props.map.setZoom(10);
             }
         });
+    }
+
+    createMarker = (business) => {
+        let position = {
+            lat: business.latitude,
+            lng: business.longitude
+        };
+
+        let marker = new window.google.maps.Marker({
+            position: position,
+            title: business.name,
+            animatation: window.google.maps.Animation.DROP
+        });
+
+        marker.setMap(this.props.map);
+
+        marker.addListener("click", () => {
+            this.populateInfoWindow(marker, business);
+            this.toggleBounce(marker);
+        });
+
+        return marker;
+    }
+
+    populateInfoWindow = (marker, business) => {
+
+        let infoWindow = this.props.infoWindow;
+
+        if(infoWindow.marker === null){
+            infoWindow.marker = marker;
+
+            infoWindow.addListener("closeclick", () => {
+                infoWindow.marker = null;
+            });
+        }
+
+        let content = `
+                        <div><b>${business.name}</b><br>
+                        ${business.phone}<br>
+                        ${business.address.street}<br>
+                        ${business.address.city}<br>
+                        <a href="https:www.yelp.com"><img src="./yelp.png"></a></div>
+                        `
+
+        infoWindow.setContent(content);
+        infoWindow.open(this.props.map, marker);
+    }
+
+    toggleBounce = (marker) => {
+        marker.setAnimation(window.google.maps.Animation.BOUNCE);
+        setTimeout(() => {
+            marker.setAnimation(null)
+        }, 750);
     }
 
     getBusinesses = (address) => {
@@ -57,7 +108,7 @@ class LocationForm extends React.Component{
             let filters = [];
 
             for (const business of json.businesses) {
-                businesses.push({
+                let size = businesses.push({
                     id: business.id,
                     name: business.name,
                     img: business.image_url,
@@ -72,6 +123,8 @@ class LocationForm extends React.Component{
                     longitude: business.coordinates.longitude,
                     categories: business.categories,
                 });
+
+                businesses[size-1]["marker"] = this.createMarker(businesses[size-1]);
 
                 business.categories.forEach((category) => {
                     if(filters.indexOf(category.title) === -1)

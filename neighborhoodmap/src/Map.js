@@ -8,9 +8,14 @@ class Map extends React.Component{
         filteredBusinessList: PropTypes.array
     }
 
-    state = {
-        map: {},
-        infoWindow: {}
+    constructor(props){
+        super(props);
+        this.state = {
+            map: {},
+            infoWindow: {}
+        }
+
+        this.MapRef = React.createRef();
     }
 
     addGoogleMapScript = () => {
@@ -25,8 +30,7 @@ class Map extends React.Component{
     }
 
     initMap = () => {
-        let mapDiv = document.getElementById("map");
-        let map = new window.google.maps.Map(mapDiv, {
+        let map = new window.google.maps.Map(this.MapRef.current, {
             zoom: 6,
             center: {
                 lat: 30.143347,
@@ -137,7 +141,7 @@ class Map extends React.Component{
 
     render(){
         return(
-            <div id="map" className="col-8">Loading map...</div>
+            <div ref={this.MapRef} id="map" className="col-8">Loading map...</div>
         );
     }
 }

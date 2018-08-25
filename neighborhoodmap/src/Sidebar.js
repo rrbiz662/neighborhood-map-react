@@ -14,9 +14,29 @@ class Sidebar extends React.Component{
         filteredBusinessList: PropTypes.array
     }
 
+    constructor(props){
+        super(props);
+        this.sidebarRef = React.createRef();
+    }
+
+    handleMediaQuery = (mediaQuery) => {
+        const sidebar = this.sidebarRef.current;
+
+        if(mediaQuery.matches)
+            sidebar.classList.add("sidenav-toggle-off");
+        else
+            sidebar.classList.remove("sidenav-toggle-off");
+    }
+
+    componentDidMount(){
+        const query = window.matchMedia("(max-width: 768px)");
+        this.handleMediaQuery(query);
+        query.addListener(this.handleMediaQuery);
+    }
+
     render(){
         return(
-            <div id="sidebar" className="sidenav bg-dark">
+            <div id="sidebar" className="sidenav bg-dark" ref={this.sidebarRef}>
                 <LocationForm
                     initLists={this.props.initLists}
                     updateLocation={this.props.updateLocation}

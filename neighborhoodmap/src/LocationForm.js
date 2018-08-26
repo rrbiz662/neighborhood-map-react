@@ -89,7 +89,7 @@ class LocationForm extends React.Component{
                 // Update the App state.
                 this.props.initLists(businesses, filters, filteredBusinesses);
             }).catch(() => {
-                alert("Error connecting to Yelp.")
+                alert("Error retrieving data from Yelp.")
             });
         }
     }

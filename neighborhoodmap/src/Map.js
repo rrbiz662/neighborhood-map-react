@@ -32,7 +32,7 @@ class Map extends React.Component{
 
         script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCpz3lEiM6sC23AMUOSJ6frxjjE95EXI50&callback=initMap";
         script.async = true;
-
+        script.onerror = this.handleGoogleMapError;
         document.body.appendChild(script);
 
         window.initMap = this.initMap;
@@ -55,6 +55,15 @@ class Map extends React.Component{
             map: map,
             infoWindow: new window.google.maps.InfoWindow()
         });
+    }
+
+    /**
+     * @description Handles errors that may occur retrieving map.
+     * @param e The error event.
+     */
+    handleGoogleMapError = (e) => {
+        if(e.type === "error")
+            alert("Error retrieving map from Google.");
     }
 
     /**

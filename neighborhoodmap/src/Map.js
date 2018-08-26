@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import YelpImg from "./yelp.png"
 
 class Map extends React.Component{
     static propTypes = {
@@ -123,7 +124,7 @@ class Map extends React.Component{
                         ${business.phone}<br>
                         ${business.address.street}<br>
                         ${business.address.city}<br>
-                        <a href="https:www.yelp.com"><img src="./yelp.png" alt="yelp image"></a></div>
+                        <a href="https:www.yelp.com"><img src="${YelpImg}" alt="yelp image"></a></div>
                         `;
 
         infoWindow.setContent(content);

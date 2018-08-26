@@ -21,18 +21,18 @@ To get a copy of the project to work on locally, the user can either `download t
 
 To install:
 1) Open command line interface.
-2) Navigate to the `neighborhoodmap`directory within the project.
+2) Navigate to the `neighborhoodmap` directory within the project.
 3) Install dependencies via command: `npm install`.
 
 ## Run the Project
 In order to run the project in `development` mode:
 1) Open command line interface.
-2) Navigate to the `neighborhoodmap`directory within the project.
+2) Navigate to the `neighborhoodmap` directory within the project.
 4) Run development server via command: `npm start`.
 
 In order to run the project in `production` mode:
 1) Open command line interface.
-2) Navigate to the `neighborhoodmap`directory within the project.
+2) Navigate to the `neighborhoodmap` directory within the project.
 3) Build production build via command: `npm run build`.
 4) Install `serve` via command: `npm install -g serve`.
 5) Run production server via command: `serve -s build`.

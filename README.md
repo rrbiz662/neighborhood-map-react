@@ -12,17 +12,31 @@ These instructions will get you a copy of the project on your local machine for 
 
 To view the webpage correctly an internet connection is required.
 
-To get dependencies and run the server the user will require `npm` JavaScript package manager.
+To get the dependencies and run the servers the user will require [`npm`](https://www.npmjs.com/get-npm) JavaScript package manager.
+
+To run the servers the user will require the latest version (`8.11.4 LTS`) of [`Node.js`](https://nodejs.org/en/download/).
 
 ### Installing
-To get a copy of the project to work on locally, the user can either `download the zip` or `clone the repository`.
+To get a copy of the project to work on locally, the user can either `download the zip` and extract the files or `clone the repository`.
 
-## Run the Project
-In order to run the project:
+To install:
 1) Open command line interface.
 2) Navigate to the directory where the project exists.
 3) Install dependencies via command: `npm install`.
-4) Run development server via command: `npm start`
+
+## Run the Project
+In order to run the project in `development` mode:
+1) Open command line interface.
+2) Navigate to the directory where the project exists.
+4) Run development server via command: `npm start`.
+
+In order to run the project in `production` mode:
+1) Open command line interface.
+2) Navigate to the directory where the project exists.
+3) Build production build via command: `npm run build`.
+4) Install `serve` via command: `npm install -g serve`.
+5) Run production server via command: `serve -s build`.
+6) Open browser and connect to `localhost:5000`.
 
 ## Built with
 * HTML5

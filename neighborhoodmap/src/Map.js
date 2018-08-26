@@ -17,8 +17,8 @@ class Map extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            map: {},
-            infoWindow: {}
+            map: null,
+            infoWindow: null
         }
 
         this.MapRef = React.createRef();
@@ -71,16 +71,18 @@ class Map extends React.Component{
      * @param address The location to zoom to.
      */
     zoomToArea = (address) => {
-        let geoCoder = new window.google.maps.Geocoder();
+        if(this.state.map !== null){
+            let geoCoder = new window.google.maps.Geocoder();
 
-        geoCoder.geocode({
-            address: address
-        }, (results, status) => {
-            if(status === window.google.maps.GeocoderStatus.OK){
-                this.state.map.setCenter(results[0].geometry.location);
-                this.state.map.setZoom(10);
-            }
-        });
+            geoCoder.geocode({
+                address: address
+            }, (results, status) => {
+                if(status === window.google.maps.GeocoderStatus.OK){
+                    this.state.map.setCenter(results[0].geometry.location);
+                    this.state.map.setZoom(10);
+                }
+            });
+        }
     }
 
     /**

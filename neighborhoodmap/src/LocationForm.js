@@ -19,7 +19,7 @@ class LocationForm extends React.Component{
         super(props);
 
         this.state = {
-            inputValue: ""
+            inputValue: "Austin, Tx"
         };
 
         this.inputRef = React.createRef();
@@ -127,6 +127,14 @@ class LocationForm extends React.Component{
         this.setState({
             inputValue: event.target.value
         });
+    }
+
+    /**
+     * @description Displays business list and map markers on startup for default location.
+     */
+    componentDidMount(){
+        this.props.updateLocation(this.state.inputValue);
+        this.getBusinesses(this.state.inputValue);
     }
 
     render(){

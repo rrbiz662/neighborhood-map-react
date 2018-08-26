@@ -6,7 +6,7 @@ class BusinessList extends React.Component{
        businessList: PropTypes.array
     }
 
-    handleClick = (event) => {
+    triggerMarkerAnimation = (event) => {
         let key = event.target.getAttribute("data-key");
 
         let foundBusiness = this.props.businessList.find((business) => {
@@ -16,13 +16,23 @@ class BusinessList extends React.Component{
         window.google.maps.event.trigger(foundBusiness.marker, "click");
     }
 
+    handleClick = (event) => {
+        this.triggerMarkerAnimation(event);
+    }
+
+    handleKeyUp = (event) => {
+        if(event.keyCode === 13){
+            this.triggerMarkerAnimation(event);
+        }
+    }
+
     render(){
         return(
             <div>
-                <ul id="locations-found" className="list-group mt-3">
+                <ul id="locations-found" className="list-group mt-3" aria-label="business list" tabIndex="0">
                 {
                     this.props.businessList.map((business) => (
-                        <li key={business.id} data-key={business.id} className="list-group-item" onClick={this.handleClick}>{business.name}</li>
+                        <li key={business.id} data-key={business.id} className="list-group-item" onClick={this.handleClick} onKeyUp={this.handleKeyUp} tabIndex="0">{business.name}</li>
                     ))
                 }
                 </ul>

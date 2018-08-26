@@ -66,7 +66,7 @@ class Map extends React.Component{
         let marker = new window.google.maps.Marker({
             position: position,
             title: business.name,
-            animatation: window.google.maps.Animation.DROP
+            animation: window.google.maps.Animation.DROP
         });
 
         marker.setMap(this.state.map);
@@ -96,7 +96,7 @@ class Map extends React.Component{
                         ${business.phone}<br>
                         ${business.address.street}<br>
                         ${business.address.city}<br>
-                        <a href="https:www.yelp.com"><img src="./yelp.png"></a></div>
+                        <a href="https:www.yelp.com"><img src="./yelp.png" alt="yelp image"></a></div>
                         `;
 
         infoWindow.setContent(content);
@@ -141,7 +141,7 @@ class Map extends React.Component{
 
     render(){
         return(
-            <div ref={this.MapRef} id="map" className="col-8">Loading map...</div>
+            <div ref={this.MapRef} id="map" className="col-8" role="application" aria-label="map">Loading map...</div>
         );
     }
 }

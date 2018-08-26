@@ -106,7 +106,7 @@ class LocationForm extends React.Component{
 
     render(){
         return(
-            <form id="location-form" className="form-group" onSubmit={this.handleSubmit}>
+            <form id="location-form" className="form-group" onSubmit={this.handleSubmit} role="search">
                 <label htmlFor="location">Location:</label>
                 <input type="text" name="location" id="location" className="form-control" placeholder="Austin, TX" onChange={this.handleChange}>
                 </input>

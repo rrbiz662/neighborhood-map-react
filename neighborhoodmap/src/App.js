@@ -5,12 +5,17 @@ import Sidebar from "./Sidebar";
 import MapDisplay from "./MapDisplay";
 
 class App extends Component {
-  state = {
+  constructor(props){
+    super(props);
+    this.state = {
       businessList: [],
       filteredBusinessList: [],
       filterList: [],
       location: ""
-    }
+    };
+
+    this.sidebarRef = React.createRef();
+  }
 
   initLists = (businesses, filters, filteredBusinesses) => {
     this.setState({
@@ -35,7 +40,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar/>
+        <Navbar sidebarRef={this.sidebarRef}/>
         <Sidebar
           businessList={this.state.businessList}
           filteredBusinessList={this.state.filteredBusinessList}
@@ -43,6 +48,7 @@ class App extends Component {
           initLists={this.initLists}
           updateFilteredBusinesses={this.updateFilteredBusinesses}
           updateLocation={this.updateLocation}
+          ref={this.sidebarRef}
         />
         <MapDisplay
           location={this.state.location}

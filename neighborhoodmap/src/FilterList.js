@@ -48,7 +48,7 @@ class FilterList extends React.Component{
     render(){
         return(
             <div>
-                <select  onChange={this.handleSelect} name="filter" id="filter" className="btn">
+                <select  onChange={this.handleSelect} name="filter" id="filter" className="btn" aria-label="filter options">
                     <option value="All">All</option>
                     {
                         this.props.filterList.map((category, index) => (

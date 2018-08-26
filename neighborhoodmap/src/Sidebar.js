@@ -21,11 +21,16 @@ class Sidebar extends React.Component{
 
     handleMediaQuery = (mediaQuery) => {
         const sidebar = this.sidebarRef.current;
+        let attr = sidebar.getAttribute("hidden");
 
-        if(mediaQuery.matches)
-            sidebar.classList.add("sidenav-toggle-off");
-        else
-            sidebar.classList.remove("sidenav-toggle-off");
+        if(mediaQuery.matches && attr === null){
+            sidebar.setAttribute("hidden", "true");
+            sidebar.setAttribute("aria-expanded", "false");
+        }
+        else{
+            sidebar.removeAttribute("hidden");
+            sidebar.setAttribute("aria-expanded", "true");
+        }
     }
 
     componentDidMount(){
@@ -36,7 +41,7 @@ class Sidebar extends React.Component{
 
     render(){
         return(
-            <div id="sidebar" className="sidenav bg-dark" ref={this.sidebarRef}>
+            <aside id="sidebar" className="sidenav bg-dark" ref={this.sidebarRef}>
                 <LocationForm
                     initLists={this.props.initLists}
                     updateLocation={this.props.updateLocation}
@@ -47,7 +52,7 @@ class Sidebar extends React.Component{
                     updateFilteredBusinesses={this.props.updateFilteredBusinesses}
                 />
                 <BusinessList businessList={this.props.filteredBusinessList}/>
-            </div>
+            </aside>
         );
     }
 

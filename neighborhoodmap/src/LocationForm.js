@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from  "react-dom"
 import PropTypes from "prop-types";
 
 const API_KEY = "zboWotd5QomCFouN96e-YRf7deALxng825rC-GpXWbeoTGZmaOYtCyl6U9eMOEJd09KNTzo6H12cbxoQb_jetLKrD_NHDf1fqVfYmAlEgvG6TZdx2qvNPiVmLWvqWnYx";
@@ -12,8 +11,18 @@ class LocationForm extends React.Component{
         updateLocation: PropTypes.func
     }
 
-    state ={
-        inputValue: "",
+    /**
+     * @description Initializes component.
+     * @param props The component properties.
+     */
+    constructor(props){
+        super(props);
+
+        this.state = {
+            inputValue: ""
+        };
+
+        this.inputRef = React.createRef();
     }
 
     /**
@@ -99,8 +108,7 @@ class LocationForm extends React.Component{
      * @description Handles "Clear" button click. Resets App state.
      */
     handleClear = () => {
-        const node = ReactDOM.findDOMNode(this);
-        const input = node.getElementsByTagName("input")[0];
+        const input = this.inputRef.current;
 
         input.value = "";
 
@@ -125,7 +133,7 @@ class LocationForm extends React.Component{
         return(
             <form id="location-form" className="form-group" onSubmit={this.handleSubmit} role="search">
                 <label htmlFor="location">Location:</label>
-                <input type="text" name="location" id="location" className="form-control" placeholder="Austin, TX" onChange={this.handleChange}>
+                <input type="text" name="location" id="location" className="form-control" placeholder="Austin, TX" onChange={this.handleChange} ref={this.inputRef}>
                 </input>
                 <button id="submit-btn" className="btn btn-light mt-3" type="submit">Search</button>
                 <button id="clear-btn" className="btn btn-light mt-3" type="button" onClick={this.handleClear}>Clear</button>

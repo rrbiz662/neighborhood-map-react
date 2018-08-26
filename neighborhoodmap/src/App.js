@@ -5,6 +5,10 @@ import Sidebar from "./Sidebar";
 import MapDisplay from "./MapDisplay";
 
 class App extends Component {
+    /**
+   * @description Initializes component.
+   * @param props The component properties.
+   */
   constructor(props){
     super(props);
     this.state = {
@@ -17,6 +21,12 @@ class App extends Component {
     this.sidebarRef = React.createRef();
   }
 
+  /**
+   * @description Initializes lists for use by othe components.
+   * @param businesses A list of all business.
+   * @param filters A list of filters to filter by.
+   * @param filteredBusinesses A list of busineses filtered by category.
+   */
   initLists = (businesses, filters, filteredBusinesses) => {
     this.setState({
       businessList: businesses,
@@ -25,12 +35,20 @@ class App extends Component {
     });
   }
 
+  /**
+   * @description Updates the filtered businesses list.
+   * @param filteredBusinesses A list of businesses filtered by category.
+   */
   updateFilteredBusinesses = (filteredBusinesses) => {
     this.setState({
       filteredBusinessList: filteredBusinesses
     });
   }
 
+  /**
+   * @description Updates the current location.
+   * @param address The new location.
+   */
   updateLocation = (address) => {
     this.setState({
       location: address

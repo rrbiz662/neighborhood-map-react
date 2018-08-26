@@ -14,15 +14,24 @@ class Sidebar extends React.Component{
         filteredBusinessList: PropTypes.array
     }
 
+    /**
+     * @description Initializes component.
+     * @param props The component properties.
+     */
     constructor(props){
         super(props);
         this.sidebarRef = React.createRef();
     }
 
+    /**
+     * @description Handles the matched media query.
+     * @param mediaQuery The media query.
+     */
     handleMediaQuery = (mediaQuery) => {
         const sidebar = this.sidebarRef.current;
         let attr = sidebar.getAttribute("hidden");
 
+        // Toggle sidebar according to media query.
         if(mediaQuery.matches && attr === null){
             sidebar.setAttribute("hidden", "true");
             sidebar.setAttribute("aria-expanded", "false");
@@ -33,6 +42,9 @@ class Sidebar extends React.Component{
         }
     }
 
+    /**
+     * @description Sets up component for media queries.
+     */
     componentDidMount(){
         const query = window.matchMedia("(max-width: 768px)");
         this.handleMediaQuery(query);

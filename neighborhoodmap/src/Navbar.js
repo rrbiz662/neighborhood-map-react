@@ -6,6 +6,9 @@ class NavBar extends React.Component{
         sidebarRef: PropTypes.object
     }
 
+    /**
+     * @description Handles the menu button click. Toggles sidebar on/off accordingly.
+     */
     toggleSidebar = () => {
         let sidebar = this.props.sidebarRef.current.sidebarRef.current;
         let attr = sidebar.getAttribute("hidden");
@@ -18,10 +21,6 @@ class NavBar extends React.Component{
             sidebar.setAttribute("hidden", "true");
             sidebar.setAttribute("aria-expanded", "false");
         }
-    }
-
-    componentDidMount(){
-
     }
 
     render(){

@@ -16,13 +16,14 @@ class LocationForm extends React.Component{
         inputValue: "",
     }
 
-    baseState = this.state;
-
+    /**
+     * @description Gets a business list for the passed in address from Yelp.
+     * @param address The address to get businesses for.
+     */
     getBusinesses = (address) => {
         if(address === "")
             this.props.initLists([], [], []);
         else{
-
             const config = {
                 headers: {
                     "Authorization": "Bearer " + API_KEY
@@ -30,16 +31,17 @@ class LocationForm extends React.Component{
             };
 
             let params = {
-                    term: "",
-                    location: address,
-                    limit: LIMIT,
-                    radius: RADIUS
-                };
+                term: "",
+                location: address,
+                limit: LIMIT,
+                radius: RADIUS
+            };
 
             // Add search params to URL.
             let url = new URL("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search");
             Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
+            // Async request to get businesses from Yelp near the address.
             fetch(url, config
             ).then((res) => {
                 return res.json();
@@ -47,6 +49,7 @@ class LocationForm extends React.Component{
                 let businesses = [];
                 let filters = [];
 
+                // Build business list.
                 for (const business of json.businesses) {
                     businesses.push({
                         id: business.id,
@@ -64,14 +67,17 @@ class LocationForm extends React.Component{
                         categories: business.categories,
                     });
 
+                    // Build list of possible filters.
                     business.categories.forEach((category) => {
                         if(filters.indexOf(category.title) === -1)
                             filters.push(category.title);
                     });
                 }
 
+                // Copy business list.
                 let filteredBusinesses = businesses.slice(0);
 
+                // Update the App state.
                 this.props.initLists(businesses, filters, filteredBusinesses);
             }).catch(() => {
                 alert("Error connecting to Yelp.")
@@ -79,12 +85,19 @@ class LocationForm extends React.Component{
         }
     }
 
+    /**
+     * @description Handles "Submit" button click. Updates and initializes business lists.
+     * @param event The triggered event.
+     */
     handleSubmit = (event) => {
         this.props.updateLocation(this.state.inputValue);
         this.getBusinesses(this.state.inputValue);
         event.preventDefault();
     }
 
+    /**
+     * @description Handles "Clear" button click. Resets App state.
+     */
     handleClear = () => {
         const node = ReactDOM.findDOMNode(this);
         const input = node.getElementsByTagName("input")[0];
@@ -98,6 +111,10 @@ class LocationForm extends React.Component{
         });
     }
 
+    /**
+     * @description Handles input text changing. Updates LocationForm state.
+     * @param event The triggered event.
+     */
     handleChange = (event) => {
         this.setState({
             inputValue: event.target.value

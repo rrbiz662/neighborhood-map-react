@@ -9,6 +9,10 @@ class MapDisplay extends React.Component {
         filteredBusinessList: PropTypes.array
     }
 
+    /**
+     * @description Initializes component.
+     * @param props The component properties.
+     */
     constructor(props){
         super(props);
         this.frontColRef = React.createRef();
@@ -16,6 +20,11 @@ class MapDisplay extends React.Component {
         this.backColRef = React.createRef();
     }
 
+
+    /**
+     * @description Handles the matched media query.
+     * @param mediaQuery The media query.
+     */
     handleMediaQuery = (mediaQuery) => {
         const frontCol = this.frontColRef.current;
         const mapCol = this.mapColRef.current.MapRef.current;
@@ -34,6 +43,9 @@ class MapDisplay extends React.Component {
         }
     }
 
+    /**
+     * @description Sets up component for media queries.
+     */
     componentDidMount(){
         const query = window.matchMedia("(max-width: 550px)");
         this.handleMediaQuery(query);

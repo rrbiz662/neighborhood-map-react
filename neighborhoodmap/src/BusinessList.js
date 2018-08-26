@@ -6,6 +6,10 @@ class BusinessList extends React.Component{
        businessList: PropTypes.array
     }
 
+    /**
+     * @description Triggers map marker animation.
+     * @param event The triggered event.
+     */
     triggerMarkerAnimation = (event) => {
         let key = event.target.getAttribute("data-key");
 
@@ -16,11 +20,20 @@ class BusinessList extends React.Component{
         window.google.maps.event.trigger(foundBusiness.marker, "click");
     }
 
+    /**
+     * @description Handles the list item click.
+     * @param event The triggered event.
+     */
     handleClick = (event) => {
         this.triggerMarkerAnimation(event);
     }
 
+    /**
+     * @description Handles the "enter" key press on a list item.
+     * @param event The triggered event.
+     */
     handleKeyUp = (event) => {
+        // Check if the "enter" key was pressed.
         if(event.keyCode === 13){
             this.triggerMarkerAnimation(event);
         }

@@ -12,13 +12,19 @@ class FilterList extends React.Component{
         selectValue: ""
     }
 
+    /**
+     * @description Handles the list item selection. Filters business list accordingly.
+     * @param event The triggered event.
+     */
     handleSelect = (event) => {
         let selectedOption = event.target.value;
 
+        // Display all businesses.
         if(selectedOption === "All"){
             this.props.updateFilteredBusinesses(this.props.businessListToFilter);
         }
         else{
+            // Filter business list to selected category.
             let filteredList = this.props.businessListToFilter.filter((business) => {
                 let foundMatch = false;
 
